@@ -1,5 +1,6 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, OneToMany } from 'typeorm';
 import { IsEmail, Length } from 'class-validator';
+import { Tarefa } from 'src/tarefas/tarefa.entity';
 
 @Entity()
 export class Membro {
@@ -13,4 +14,7 @@ export class Membro {
     @Column()
     @Length(5)
     nome: string;
+
+    @OneToMany(() => Tarefa, tarefa => tarefa.membro)
+  tarefas: Tarefa[];
 }
