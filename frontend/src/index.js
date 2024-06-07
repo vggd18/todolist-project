@@ -1,14 +1,25 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import { BrowserRouter as Router } from 'react-router-dom';
+import ReactDOM from 'react-dom/client';
 import App from './App';
+import './index.css';
+import TarefaCreatePage from './routes/TarefaCreatePage';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <App />,
+  },
+  {
+    path: 'tarefas/nova',
+    element: <TarefaCreatePage />
+  }
+    ]
+);
+
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Router>
-      <App />
-    </Router>
+    <RouterProvider router={router} />
   </React.StrictMode>
 );
