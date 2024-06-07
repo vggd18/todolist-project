@@ -4,8 +4,8 @@ import './style/Navbar.css'
 const Navbar = () => {
     return (
         <nav>
-        <Link to="/tarefas/nova">Criar Nova Tarefa</Link>
         <Link to="/tarefas">Listar Tarefas</Link>
+        <Link>Criar Membro</Link>
       </nav>
     );
 }

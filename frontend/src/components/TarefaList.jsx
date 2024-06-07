@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getTarefas, updateTarefa, deleteTarefa } from '../services/api';
+import { getTarefas, updateTarefa, deleteTarefa, createTarefa } from '../services/api';
 import Modal from './Modal';
 import DescriptionModal from './DescriptionModal';
 
@@ -9,6 +9,7 @@ const TarefaList = () => {
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [descriptionModalIsOpen, setDescriptionModalIsOpen] = useState(false);
     const [currentTarefa, setCurrentTarefa] = useState(null);
+    const [isEditing, setIsEditing] = useState(false);
 
     useEffect(() => {
         loadTarefas();
@@ -27,7 +28,6 @@ const TarefaList = () => {
     const handleDelete = async (id) => {
         await deleteTarefa(id);
         loadTarefas();
-        // Se a tarefa excluída tiver a descrição atualmente mostrada, feche o modal de descrição
         if (descricao && tarefas.find(tarefa => tarefa.id === id)?.descricao === descricao) {
             setDescriptionModalIsOpen(false);
             setDescricao('');
@@ -45,13 +45,23 @@ const TarefaList = () => {
 
     const handleEdit = (tarefa) => {
         setCurrentTarefa(tarefa);
+        setIsEditing(true);
+        setModalIsOpen(true);
+    };
+
+    const handleCreate = () => {
+        setCurrentTarefa(null);
+        setIsEditing(false);
         setModalIsOpen(true);
     };
 
     const handleSave = async (tarefa) => {
         try {
-            console.log('Handle Save Tarefa:', tarefa);
-            await updateTarefa(tarefa.id, tarefa);
+            if (isEditing) {
+                await updateTarefa(tarefa.id, tarefa);
+            } else {
+                await createTarefa(tarefa);
+            }
             loadTarefas();
             setModalIsOpen(false);
         } catch (error) {
@@ -62,6 +72,7 @@ const TarefaList = () => {
     return (
         <div>
             <h2>Listagem de Tarefas</h2>
+            <button onClick={handleCreate}>Criar Nova Tarefa</button>
             <table>
                 <thead>
                     <tr>
@@ -93,7 +104,7 @@ const TarefaList = () => {
                 onClose={() => setModalIsOpen(false)} 
                 tarefa={currentTarefa} 
                 onSave={handleSave} 
-                onDelete={handleDelete}
+                isEditing={isEditing}
             />
             <DescriptionModal 
                 isOpen={descriptionModalIsOpen} 

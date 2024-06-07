@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-const Modal = ({ isOpen, onClose, tarefa, onSave, onDelete }) => {
+const Modal = ({ isOpen, onClose, tarefa, onSave, isEditing }) => {
     const [nome, setNome] = useState('');
     const [descricao, setDescricao] = useState('');
     const [dataTermino, setDataTermino] = useState('');
@@ -25,6 +25,7 @@ const Modal = ({ isOpen, onClose, tarefa, onSave, onDelete }) => {
             ...tarefa,
             nome,
             descricao,
+            dataTermino: isEditing ? tarefa.dataTermino : dataTermino,
             prioridade,
         };
         onSave(updatedTarefa);
@@ -36,7 +37,7 @@ const Modal = ({ isOpen, onClose, tarefa, onSave, onDelete }) => {
     return (
         <div className="modal-overlay">
             <div className="modal-content">
-                <h2>Editar Tarefa</h2>
+                <h2>{isEditing ? 'Editar Tarefa' : 'Criar Nova Tarefa'}</h2>
                 <label>
                     Nome:
                     <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
@@ -47,7 +48,7 @@ const Modal = ({ isOpen, onClose, tarefa, onSave, onDelete }) => {
                 </label>
                 <label>
                     Data de Término:
-                    <input type="date" value={dataTermino} disabled />
+                    <input type="date" value={dataTermino} onChange={(e) => setDataTermino(e.target.value)} disabled={isEditing} />
                 </label>
                 <label>
                     Prioridade:
