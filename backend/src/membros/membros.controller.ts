@@ -1,6 +1,7 @@
 import { Controller, Get, Post, Put, Delete, Body, Param } from '@nestjs/common';
 import { MembrosService } from './membros.service';
 import { Membro } from './membro.entity';
+import { Public } from 'src/auth/public.decorator';
 
 @Controller('membros')
 export class MembrosController {
@@ -15,7 +16,8 @@ export class MembrosController {
     findOne(@Param('id') id: number): Promise<Membro> {
       return this.membrosService.findOne(id);
     }
-
+    
+    @Public()
     @Post()
     create(@Body() membro:Membro): Promise<Membro>{
         return this.membrosService.create(membro);
