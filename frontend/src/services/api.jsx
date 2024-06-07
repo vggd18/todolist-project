@@ -15,3 +15,7 @@ export const getTarefas = () => {
 export const updateTarefa = (id, tarefa) => {
   return api.put(`/tarefas/${id}`, tarefa);
 }
+
+export const deleteTarefa = (id) => {
+  api.delete(`/tarefas/${id}`);
+}
