@@ -1,6 +1,5 @@
 import React from 'react';
-import TarefaList from '../components/MembroCreate';
-
+import MembroCreate from '../components/MembroCreate';
 
 const MembroCreatePage = () => {
   return (
