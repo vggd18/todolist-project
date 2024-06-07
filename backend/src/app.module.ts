@@ -1,7 +1,10 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
+import { MembrosModule } from './membros/membros.module';
 import { TarefasModule } from './tarefas/tarefas.module';
+import { Membro } from './membros/membro.entity';
+import { Tarefa } from './tarefas/tarefa.entity';
 
 @Module({
   imports: [
@@ -15,8 +18,10 @@ import { TarefasModule } from './tarefas/tarefas.module';
       database: process.env.DB_DATABASE,
       autoLoadEntities: true,
       synchronize: true,
+      entities: [Membro, Tarefa],
       driver: require('mysql2'),
     }),
+    MembrosModule,
     TarefasModule,
   ],
 })
