@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getTarefas, updateTarefa } from '../services/api';
+import { getTarefas, updateTarefa, deleteTarefa } from '../services/api';
 
 const TarefaList = () => {
     const [tarefas, setTarefas] = useState([]);
@@ -16,6 +16,11 @@ const TarefaList = () => {
 
     const handleClick = (descricao) => {
         setDescricao(descricao);
+    };
+
+    const handleDelete = async (id) => {
+        deleteTarefa(id);
+        loadTarefas();
     };
 
     const handleFinalizarTarefa = async (id) => {
@@ -36,7 +41,7 @@ const TarefaList = () => {
                         <span onClick={() => handleClick(tarefa.descricao)}>
                             {tarefa.nome} - {tarefa.prioridade} - {tarefa.finalizada ? 'Finalizada' : 'Pendente'}
                         </span>
-                        <button>Excluir</button>
+                        <button onClick={ () => {handleDelete(tarefa.id)} }>Excluir</button>
                         {!tarefa.finalizada && <button onClick={() => handleFinalizarTarefa(tarefa.id)}>Finalizar</button>}
                     </li>
                 ))}
