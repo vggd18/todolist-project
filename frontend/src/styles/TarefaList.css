@@ -1,0 +1,62 @@
+
+.task-layer {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.task-layer h2 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.task-layer th, .task-layer td {
+    border: 1px solid #ccc;
+    padding: 8px;
+    text-align: center;
+}
+
+.task-layer th {
+    background-color: #005fed;
+    
+}
+
+.task-layer td {
+    background-color: white;
+}
+
+.new-task {
+    padding: 3px;
+    background-color: #005fed;
+    color: white;
+    width: 80%;
+    margin: auto;
+    border: none;
+    border-radius: 4px;
+    text-align: center;
+    font-size: 20px;
+    margin-bottom: 30px;
+}
+
+.buttons-task button{
+    width: 30%;
+    padding: 10px;
+    margin: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    background-color: #005fed;
+    color: white;
+}
+
+.buttons-task button:hover, .new-task:hover{
+    background-color: #203f97;
+    color: #e3e2fd;
+
+}
+
+.task-layer table {
+    width: 80%;
+    border-collapse: collapse;
+    margin: 20px auto;
+}

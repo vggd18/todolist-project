@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../styles/Modal.css'
 
 const Modal = ({ isOpen, onClose, tarefa, onSave, isEditing }) => {
     const [nome, setNome] = useState('');
@@ -36,31 +37,47 @@ const Modal = ({ isOpen, onClose, tarefa, onSave, isEditing }) => {
 
     return (
         <div className="modal-overlay">
-            <div className="modal-content">
-                <h2>{isEditing ? 'Editar Tarefa' : 'Criar Nova Tarefa'}</h2>
+            <h2>{isEditing ? 'Editar Tarefa' : 'Criar Nova Tarefa'}</h2>
+            <form className="modal-content">
                 <label>
-                    Nome:
-                    <input type="text" value={nome} onChange={(e) => setNome(e.target.value)} />
+                    Nome
+                    <input 
+                        type="text" 
+                        value={nome} 
+                        onChange={(e) => setNome(e.target.value)} 
+                        required
+                    />
                 </label>
                 <label>
-                    Descrição:
-                    <textarea value={descricao} onChange={(e) => setDescricao(e.target.value)}></textarea>
+                    Descrição
+                    <textarea 
+                        value={descricao} 
+                        onChange={(e) => setDescricao(e.target.value)}
+                    ></textarea>
                 </label>
                 <label>
-                    Data de Término:
-                    <input type="date" value={dataTermino} onChange={(e) => setDataTermino(e.target.value)} disabled={isEditing} />
+                    Data de Término
+                    <input type="date"
+                    value={dataTermino}
+                    onChange={(e) => setDataTermino(e.target.value)}
+                    disabled={isEditing}
+                    />
                 </label>
                 <label>
-                    Prioridade:
-                    <select value={prioridade} onChange={(e) => setPrioridade(e.target.value)}>
+                    Prioridade
+                    <select 
+                        value={prioridade}
+                        onChange={(e) =>
+                        setPrioridade(e.target.value)}
+                    >
                         <option value="Baixa">Baixa</option>
                         <option value="Média">Média</option>
                         <option value="Alta">Alta</option>
                     </select>
                 </label>
-                <button onClick={handleSubmit}>Salvar</button>
-                <button onClick={onClose}>Cancelar</button>
-            </div>
+                <button onClick={handleSubmit} className='save'>Salvar</button>
+                <button onClick={onClose} className='cancel'>Cancelar</button>
+            </form>
         </div>
     );
 };
