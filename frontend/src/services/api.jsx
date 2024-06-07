@@ -7,3 +7,11 @@ const api = axios.create({
 export const createTarefa = (tarefa) => {
   return api.post('/tarefas', tarefa);
 };
+
+export const getTarefas = () => {
+  return api.get('/tarefas');
+}
+
+export const updateTarefa = (id, tarefa) => {
+  return api.put(`/tarefas/${id}`, tarefa);
+}

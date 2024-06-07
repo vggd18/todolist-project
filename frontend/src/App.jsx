@@ -7,6 +7,7 @@ const App = () => {
       <h1>Minha Aplicação</h1>
       <nav>
         <Link to="/tarefas/nova">Criar Nova Tarefa</Link>
+        <Link to="/tarefas">Listar Tarefas</Link>
       </nav>
       <Outlet />
     </div>

@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import App from './App';
 import './index.css';
-import TarefaCreatePage from './routes/TarefaCreatePage';
-
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import TarefaCreatePage from './routes/TarefaCreatePage';
+import TarefaListPage from './routes/TarefaListPage';
 
 const router = createBrowserRouter([
   {
@@ -14,6 +14,10 @@ const router = createBrowserRouter([
   {
     path: 'tarefas/nova',
     element: <TarefaCreatePage />
+  },
+  {
+    path: '/tarefas',
+    element: <TarefaListPage />
   }
     ]
 );
