@@ -1,7 +1,6 @@
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule } from '@nestjs/config';
-import { MembrosModule } from './membros/membros.module';
 
 @Module({
   imports: [
@@ -17,7 +16,6 @@ import { MembrosModule } from './membros/membros.module';
       synchronize: true,
       driver: require('mysql2'),
     }),
-    MembrosModule,
   ],
 })
 export class AppModule {}
