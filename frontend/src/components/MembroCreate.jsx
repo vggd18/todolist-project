@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { createMembro } from '../services/api';
-import '../styles/MembroCreate.css'
+
 const MembroCreate = () => {
     const [id, setId] = useState('');
     const [email, setEmail] = useState('');
@@ -20,7 +20,7 @@ const MembroCreate = () => {
     };
 
     return (
-        <div className="membro-layer">
+        <div className="membro-list">
             <h2>Cadastro de Membros</h2>
             <form className="membro-form" onSubmit={handleSubmit}>
                 <label>
