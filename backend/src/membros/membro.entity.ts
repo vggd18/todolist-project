@@ -18,6 +18,14 @@ export class Membro {
     @IsNotEmpty()
     nome: string;
 
-    @OneToMany(() => Tarefa, tarefa => tarefa.membro)
+    @Column()
+    @Length(3)
+    @IsNotEmpty()
+    senha: string;
+
+    @OneToMany(() => Tarefa, tarefa => tarefa.membro, {
+        cascade: true,
+        onDelete: 'CASCADE'
+    })
     tarefas: Tarefa[];
 }
