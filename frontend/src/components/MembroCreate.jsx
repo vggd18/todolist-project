@@ -2,16 +2,14 @@ import React, { useState } from 'react';
 import { createMembro } from '../services/api';
 import '../styles/MembroCreate.css'
 const MembroCreate = () => {
-    const [id, setId] = useState('');
     const [email, setEmail] = useState('');
     const [nome, setNome] = useState('');
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const novoMembro = { id, email, nome };
+        const novoMembro = { email, nome };
         try {
             await createMembro(novoMembro);
-            setId('');
             setEmail('');
             setNome('');
         } catch (error) {
@@ -23,15 +21,6 @@ const MembroCreate = () => {
         <div className="membro-layer">
             <h2>Cadastro de Membros</h2>
             <form className="membro-form" onSubmit={handleSubmit}>
-                <label>
-                    ID:
-                    <input
-                        type="text"
-                        value={id}
-                        onChange={(e) => setId(e.target.value)}
-                        required
-                    />
-                </label>
                 <label>
                     Email:
                     <input
