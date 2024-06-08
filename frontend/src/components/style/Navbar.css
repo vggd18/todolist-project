@@ -1,0 +1,17 @@
+nav {
+    background: linear-gradient(to right, #6032bb, #4b0081);
+    padding: 10px;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    margin: 0 30px;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 20pt;
+}
+
+nav a:hover {
+    color: #808080;
+}

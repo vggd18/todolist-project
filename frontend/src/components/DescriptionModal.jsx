@@ -1,21 +1,16 @@
 import React from 'react';
-import '../styles/DescriptionModal.css'
 
 const DescriptionModal = ({ isOpen, onClose, descricao }) => {
     if (!isOpen) return null;
 
     return (
-        <div className="description-overlay">
-            <div className="description-content">
-                <h2>Descrição da tarefa</h2>
-                <div className="description-box">
-                    <p>{descricao}</p>
-                </div>
+        <div className="modal-overlay">
+            <div className="modal-content">
+                <h2>Descrição da Tarefa</h2>
+                <p>{descricao}</p>
                 <button onClick={onClose}>Fechar</button>
             </div>
         </div>
-
-
     );
 };
 

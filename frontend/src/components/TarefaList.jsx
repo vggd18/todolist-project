@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { getTarefas, updateTarefa, deleteTarefa, createTarefa } from '../services/api';
 import Modal from './Modal';
 import DescriptionModal from './DescriptionModal';
-import '../styles/TarefaList.css'
 
 const TarefaList = () => {
     const [tarefas, setTarefas] = useState([]);
@@ -11,7 +10,6 @@ const TarefaList = () => {
     const [descriptionModalIsOpen, setDescriptionModalIsOpen] = useState(false);
     const [currentTarefa, setCurrentTarefa] = useState(null);
     const [isEditing, setIsEditing] = useState(false);
-    const [selectedTarefaId, setSelectedTarefaId] = useState(null);
 
     useEffect(() => {
         loadTarefas();
@@ -22,9 +20,8 @@ const TarefaList = () => {
         setTarefas(response.data);
     };
 
-    const handleClick = (tarefa) => {
-        setDescricao(tarefa.descricao);
-        setSelectedTarefaId(tarefa.id);
+    const handleClick = (descricao) => {
+        setDescricao(descricao);
         setDescriptionModalIsOpen(true);
     };
 
@@ -34,7 +31,6 @@ const TarefaList = () => {
         if (descricao && tarefas.find(tarefa => tarefa.id === id)?.descricao === descricao) {
             setDescriptionModalIsOpen(false);
             setDescricao('');
-            setSelectedTarefaId(null);
         }
     };
 
@@ -74,7 +70,9 @@ const TarefaList = () => {
     };
 
     return (
-        <div className='task-layer'>
+        <div>
+            <h2>Listagem de Tarefas</h2>
+            <button onClick={handleCreate}>Criar Nova Tarefa</button>
             <table>
                 <thead>
                     <tr>
@@ -86,46 +84,32 @@ const TarefaList = () => {
                 </thead>
                 <tbody>
                     {tarefas.map(tarefa => (
-                        <React.Fragment key={tarefa.id}>
-                            <tr>
-                                <td onClick={() => handleClick(tarefa)}>
-                                    {tarefa.nome}
-                                </td>
-                                <td>{tarefa.prioridade}</td>
-                                <td>{tarefa.finalizada ? 'Finalizada' : 'Pendente'}</td>
-                                <td className='buttons-task'>
-                                    <button onClick={() => handleEdit(tarefa)}>Editar</button>
-                                    <button onClick={() => handleDelete(tarefa.id)}>Excluir</button>
-                                    {!tarefa.finalizada && <button onClick={() => handleFinalizarTarefa(tarefa.id)}>Finalizar</button>}
-                                </td>
-                            </tr>
-                            {selectedTarefaId === tarefa.id && descriptionModalIsOpen && (
-                                <tr>
-                                    <td colSpan="4">
-                                        <DescriptionModal 
-                                            isOpen={descriptionModalIsOpen} 
-                                            onClose={() => {
-                                                setDescriptionModalIsOpen(false);
-                                                setSelectedTarefaId(null);
-                                            }} 
-                                            descricao={descricao} 
-                                        />
-                                    </td>
-                                </tr>
-                            )}
-                        </React.Fragment>
+                        <tr key={tarefa.id}>
+                            <td onClick={() => handleClick(tarefa.descricao)}>
+                                {tarefa.nome}
+                            </td>
+                            <td>{tarefa.prioridade}</td>
+                            <td>{tarefa.finalizada ? 'Finalizada' : 'Pendente'}</td>
+                            <td>
+                                <button onClick={() => handleEdit(tarefa)}>Editar</button>
+                                <button onClick={() => handleDelete(tarefa.id)}>Excluir</button>
+                                {!tarefa.finalizada && <button onClick={() => handleFinalizarTarefa(tarefa.id)}>Finalizar</button>}
+                            </td>
+                        </tr>
                     ))}
                 </tbody>
             </table>
-            <div className='new-task'>
-                <p onClick={handleCreate}>Criar Nova Tarefa</p>
-            </div>
             <Modal 
                 isOpen={modalIsOpen} 
                 onClose={() => setModalIsOpen(false)} 
                 tarefa={currentTarefa} 
                 onSave={handleSave} 
                 isEditing={isEditing}
+            />
+            <DescriptionModal 
+                isOpen={descriptionModalIsOpen} 
+                onClose={() => setDescriptionModalIsOpen(false)} 
+                descricao={descricao} 
             />
         </div>
     );
