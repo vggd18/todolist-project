@@ -10,16 +10,20 @@ export const createTarefa = (tarefa) => {
 
 export const getTarefas = () => {
   return api.get('/tarefas');
-}
+};
 
 export const updateTarefa = (id, tarefa) => {
   return api.put(`/tarefas/${id}`, tarefa);
-}
+};
 
 export const deleteTarefa = (id) => {
-  api.delete(`/tarefas/${id}`);
-}
+  return api.delete(`/tarefas/${id}`);
+};
 
 export const createMembro = (membro) => {
   return api.post('/membros', membro);
-}
+};
+
+export const login = (email, senha) => {
+  return api.post('/auth/login', { email, senha });
+};

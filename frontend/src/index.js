@@ -5,11 +5,16 @@ import './styles/index.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import TarefaListPage from './routes/TarefaListPage';
 import MembroCreatePage from './routes/MembroCreatePage';
+import Login from './Login';
 
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <App />,
+    element: <Login />,
+  },
+  {
+    path: '/home',
+    element: <App />
   },
   {
     path: '/tarefas',
